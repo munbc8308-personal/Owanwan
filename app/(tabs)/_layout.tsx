@@ -73,6 +73,26 @@ function CustomTabBar({
   navigation: { navigate: (name: string) => void };
   onUpload: () => void;
 }) {
+  const LEFT_TABS = TAB_ITEMS.slice(0, 2);
+  const RIGHT_TABS = TAB_ITEMS.slice(2);
+
+  const renderTab = (item: typeof TAB_ITEMS[number]) => {
+    const Icon = item.icon;
+    const active = state.routes[state.index]?.name === item.key;
+    return (
+      <TouchableOpacity
+        key={item.key}
+        onPress={() => navigation.navigate(item.key)}
+        style={{ flex: 1, alignItems: "center", gap: 4, opacity: active ? 1 : 0.4 }}
+      >
+        <Icon size={20} color={COLOR.asphalt} />
+        <Text style={{ fontFamily: FONT_BODY_BOLD, fontSize: 10, color: COLOR.asphalt }}>
+          {item.label}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View
       style={{
@@ -81,50 +101,41 @@ function CustomTabBar({
         borderTopColor: COLOR.concreteDark,
         paddingBottom: Platform.OS === "ios" ? 24 : 12,
         paddingTop: 20,
-        paddingHorizontal: 24,
+        paddingHorizontal: 16,
         flexDirection: "row",
-        justifyContent: "space-between",
-        position: "relative",
+        alignItems: "flex-start",
       }}
     >
-      {/* Upload FAB */}
-      <TouchableOpacity
-        onPress={onUpload}
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: -28,
-          marginLeft: -32,
-          width: 64,
-          height: 64,
-          borderRadius: 32,
-          backgroundColor: COLOR.lime,
-          borderWidth: 3,
-          borderColor: COLOR.concrete,
-          alignItems: "center",
-          justifyContent: "center",
-          elevation: 8,
-        }}
-      >
-        <Camera size={26} color={COLOR.asphalt} />
-      </TouchableOpacity>
+      {/* Left tabs */}
+      <View style={{ flex: 1, flexDirection: "row" }}>
+        {LEFT_TABS.map(renderTab)}
+      </View>
 
-      {TAB_ITEMS.map((item) => {
-        const Icon = item.icon;
-        const active = state.routes[state.index]?.name === item.key;
-        return (
-          <TouchableOpacity
-            key={item.key}
-            onPress={() => navigation.navigate(item.key)}
-            style={{ alignItems: "center", gap: 4, width: 48, opacity: active ? 1 : 0.4 }}
-          >
-            <Icon size={20} color={COLOR.asphalt} />
-            <Text style={{ fontFamily: FONT_BODY_BOLD, fontSize: 10, color: COLOR.asphalt }}>
-              {item.label}
-            </Text>
-          </TouchableOpacity>
-        );
-      })}
+      {/* FAB — exact center column */}
+      <View style={{ width: 64, alignItems: "center" }}>
+        <TouchableOpacity
+          onPress={onUpload}
+          style={{
+            width: 64,
+            height: 64,
+            borderRadius: 32,
+            backgroundColor: COLOR.lime,
+            borderWidth: 3,
+            borderColor: COLOR.concrete,
+            alignItems: "center",
+            justifyContent: "center",
+            elevation: 8,
+            marginTop: -28,
+          }}
+        >
+          <Camera size={26} color={COLOR.asphalt} />
+        </TouchableOpacity>
+      </View>
+
+      {/* Right tabs */}
+      <View style={{ flex: 1, flexDirection: "row" }}>
+        {RIGHT_TABS.map(renderTab)}
+      </View>
     </View>
   );
 }
