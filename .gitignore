@@ -1,0 +1,20 @@
+node_modules/
+.expo/
+dist/
+.env.local
+.env.*.local
+*.orig.*
+web-build/
+
+# Native build artifacts
+ios/Pods/
+ios/build/
+ios/.xcode.env.local
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+
+# IDE
+.idea/
+*.iml
