@@ -17,6 +17,7 @@ import { View, ActivityIndicator } from "react-native";
 import { useEffect } from "react";
 import { COLOR } from "@/constants/theme";
 import { AuthProvider, useAuth } from "@/lib/auth";
+import { PurchasesProvider } from "@/lib/purchases";
 
 function RootLayoutNav() {
   const { session, loading } = useAuth();
@@ -70,7 +71,9 @@ export default function RootLayout() {
 
   return (
     <AuthProvider>
-      <RootLayoutNav />
+      <PurchasesProvider>
+        <RootLayoutNav />
+      </PurchasesProvider>
     </AuthProvider>
   );
 }

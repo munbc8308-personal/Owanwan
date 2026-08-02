@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { View, Text, Modal, TouchableOpacity, ScrollView } from "react-native";
+import { useState, useEffect } from "react";
+import { View, Text, Modal, TouchableOpacity, ScrollView, Alert, ActivityIndicator } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { X, Check } from "lucide-react-native";
+import { X, Check, RotateCcw } from "lucide-react-native";
+import { PACKAGE_TYPE, type PurchasesPackage } from "react-native-purchases";
 import { COLOR } from "@/constants/theme";
+import { usePurchases } from "@/lib/purchases";
 
 const FONT_DISPLAY = "BebasNeue_400Regular";
 const FONT_BODY = "Manrope_400Regular";
@@ -27,11 +29,72 @@ interface SubscribeOverlayProps {
 export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayProps) {
   const [plan, setPlan] = useState<"monthly" | "yearly">("yearly");
   const [done, setDone] = useState(false);
+  const [purchasing, setPurchasing] = useState(false);
+  const [restoring, setRestoring] = useState(false);
   const insets = useSafeAreaInsets();
+
+  const { isPremium, packages, purchasePackage, restorePurchases, refresh, loading } = usePurchases();
+
+  useEffect(() => {
+    if (visible) {
+      refresh();
+      if (isPremium) setDone(true);
+    }
+  }, [visible]);
+
+  useEffect(() => {
+    if (isPremium && visible && !done) setDone(true);
+  }, [isPremium]);
 
   const handleClose = () => {
     setDone(false);
+    setPurchasing(false);
+    setRestoring(false);
     onClose();
+  };
+
+  const findPackage = (type: "monthly" | "yearly"): PurchasesPackage | undefined => {
+    return packages.find((p) =>
+      type === "monthly"
+        ? p.packageType === PACKAGE_TYPE.MONTHLY
+        : p.packageType === PACKAGE_TYPE.ANNUAL
+    );
+  };
+
+  const handlePurchase = async () => {
+    const pkg = findPackage(plan);
+    if (!pkg) {
+      Alert.alert("오류", "상품 정보를 불러오지 못했어요. 잠시 후 다시 시도해주세요.");
+      return;
+    }
+    setPurchasing(true);
+    const { success, error } = await purchasePackage(pkg);
+    setPurchasing(false);
+    if (success) {
+      setDone(true);
+    } else if (error) {
+      Alert.alert("결제 실패", error);
+    }
+  };
+
+  const handleRestore = async () => {
+    setRestoring(true);
+    const { success, error } = await restorePurchases();
+    setRestoring(false);
+    if (success) {
+      setDone(true);
+    } else {
+      Alert.alert("복원 실패", error ?? "이전 구독 내역을 찾지 못했어요.");
+    }
+  };
+
+  const monthlyPkg = findPackage("monthly");
+  const yearlyPkg = findPackage("yearly");
+
+  const priceLabel = (type: "monthly" | "yearly") => {
+    const pkg = type === "monthly" ? monthlyPkg : yearlyPkg;
+    if (!pkg) return type === "monthly" ? "1,500원" : "15,000원";
+    return pkg.product.priceString;
   };
 
   return (
@@ -46,18 +109,11 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
               구독이 완료됐어요
             </Text>
             <Text style={{ fontFamily: FONT_BODY, fontSize: 13, color: COLOR.slate, marginTop: 12, textAlign: "center", lineHeight: 20 }}>
-              {plan === "yearly" ? "연 15,000원" : "월 1,500원"} 결제가 확인됐어요.{"\n"}이제 모든 기능을 사용할 수 있어요.
+              이제 모든 기능을 사용할 수 있어요.
             </Text>
             <TouchableOpacity
               onPress={handleClose}
-              style={{
-                marginTop: 40,
-                width: "100%",
-                paddingVertical: 16,
-                borderRadius: 16,
-                backgroundColor: COLOR.lime,
-                alignItems: "center",
-              }}
+              style={{ marginTop: 40, width: "100%", paddingVertical: 16, borderRadius: 16, backgroundColor: COLOR.lime, alignItems: "center" }}
             >
               <Text style={{ fontFamily: FONT_BODY_EXTRABOLD, fontSize: 15, color: COLOR.asphalt }}>
                 시작하기
@@ -83,7 +139,12 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
               <Text style={{ fontFamily: FONT_BODY_BOLD, fontSize: 13, color: COLOR.slate }}>
                 구독하기
               </Text>
-              <View style={{ width: 20 }} />
+              <TouchableOpacity onPress={handleRestore} disabled={restoring} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}>
+                {restoring
+                  ? <ActivityIndicator size="small" color={COLOR.slate} />
+                  : <RotateCcw size={18} color={COLOR.slate} />
+                }
+              </TouchableOpacity>
             </View>
 
             <ScrollView contentContainerStyle={{ paddingBottom: 16, paddingHorizontal: 20, paddingTop: 8 }}>
@@ -95,40 +156,45 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
               </Text>
 
               {/* Plan toggle */}
-              <View>
-                {(["monthly", "yearly"] as const).map((p) => (
-                  <TouchableOpacity
-                    key={p}
-                    onPress={() => setPlan(p)}
-                    style={{
-                      flex: 1,
-                      borderRadius: 16,
-                      padding: 16,
-                      backgroundColor: plan === p ? COLOR.asphalt : COLOR.white,
-                      borderWidth: 1.5,
-                      borderColor: plan === p ? COLOR.asphalt : COLOR.concreteDark,
-                      position: "relative",
-                    }}
-                  >
-                    {p === "yearly" && (
-                      <View style={{ position: "absolute", top: -8, right: 12, backgroundColor: COLOR.red, paddingHorizontal: 8, paddingVertical: 2, borderRadius: 10 }}>
-                        <Text style={{ fontFamily: FONT_BODY_EXTRABOLD, fontSize: 9, color: COLOR.white }}>
-                          17% 할인
-                        </Text>
-                      </View>
-                    )}
-                    <Text style={{ fontFamily: FONT_BODY_BOLD, fontSize: 12, color: COLOR.slate }}>
-                      {p === "monthly" ? "월간" : "연간"}
-                    </Text>
-                    <Text style={{ fontFamily: FONT_DISPLAY, fontSize: 24, color: plan === p ? COLOR.lime : COLOR.asphalt, marginTop: 2 }}>
-                      {p === "monthly" ? "1,500원" : "15,000원"}
-                    </Text>
-                    <Text style={{ fontFamily: FONT_BODY, fontSize: 11, color: COLOR.slate }}>
-                      {p === "monthly" ? "매월" : "월 1,250원 꼴"}
-                    </Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
+              {loading ? (
+                <View style={{ paddingVertical: 40, alignItems: "center" }}>
+                  <ActivityIndicator color={COLOR.asphalt} />
+                </View>
+              ) : (
+                <View style={{ gap: 10, marginTop: 20 }}>
+                  {(["yearly", "monthly"] as const).map((p) => (
+                    <TouchableOpacity
+                      key={p}
+                      onPress={() => setPlan(p)}
+                      style={{
+                        borderRadius: 16,
+                        padding: 16,
+                        backgroundColor: plan === p ? COLOR.asphalt : COLOR.white,
+                        borderWidth: 1.5,
+                        borderColor: plan === p ? COLOR.asphalt : COLOR.concreteDark,
+                        position: "relative",
+                      }}
+                    >
+                      {p === "yearly" && (
+                        <View style={{ position: "absolute", top: -8, right: 12, backgroundColor: COLOR.red, paddingHorizontal: 8, paddingVertical: 2, borderRadius: 10 }}>
+                          <Text style={{ fontFamily: FONT_BODY_EXTRABOLD, fontSize: 9, color: COLOR.white }}>
+                            17% 할인
+                          </Text>
+                        </View>
+                      )}
+                      <Text style={{ fontFamily: FONT_BODY_BOLD, fontSize: 12, color: plan === p ? COLOR.slate : COLOR.slate }}>
+                        {p === "monthly" ? "월간" : "연간"}
+                      </Text>
+                      <Text style={{ fontFamily: FONT_DISPLAY, fontSize: 24, color: plan === p ? COLOR.lime : COLOR.asphalt, marginTop: 2 }}>
+                        {priceLabel(p)}
+                      </Text>
+                      <Text style={{ fontFamily: FONT_BODY, fontSize: 11, color: COLOR.slate }}>
+                        {p === "monthly" ? "매월" : "월 환산 1,250원"}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              )}
 
               {/* Features list */}
               <Text style={{ fontFamily: FONT_BODY_BOLD, fontSize: 11, color: COLOR.slate, marginTop: 24 }}>
@@ -162,19 +228,25 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
             </ScrollView>
 
             {/* CTA */}
-            <View>
+            <View style={{ paddingHorizontal: 20, paddingBottom: insets.bottom + 16 }}>
               <TouchableOpacity
-                onPress={() => setDone(true)}
+                onPress={handlePurchase}
+                disabled={purchasing || loading}
                 style={{
                   paddingVertical: 16,
                   borderRadius: 16,
-                  backgroundColor: COLOR.lime,
+                  backgroundColor: purchasing || loading ? COLOR.concreteDark : COLOR.lime,
                   alignItems: "center",
                 }}
               >
-                <Text style={{ fontFamily: FONT_BODY_EXTRABOLD, fontSize: 15, color: COLOR.asphalt }}>
-                  {plan === "yearly" ? "연 15,000원 결제하기" : "월 1,500원 결제하기"}
-                </Text>
+                {purchasing
+                  ? <ActivityIndicator color={COLOR.asphalt} />
+                  : (
+                    <Text style={{ fontFamily: FONT_BODY_EXTRABOLD, fontSize: 15, color: COLOR.asphalt }}>
+                      {plan === "yearly" ? `연간 ${priceLabel("yearly")} 결제하기` : `월간 ${priceLabel("monthly")} 결제하기`}
+                    </Text>
+                  )
+                }
               </TouchableOpacity>
             </View>
           </>

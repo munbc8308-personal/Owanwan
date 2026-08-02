@@ -13,6 +13,7 @@ import { Lock } from "lucide-react-native";
 import { COLOR } from "@/constants/theme";
 import { useAuth } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
+import { usePurchases } from "@/lib/purchases";
 import SubscribeOverlay from "@/components/modals/SubscribeOverlay";
 
 const FONT_DISPLAY = "BebasNeue_400Regular";
@@ -40,6 +41,7 @@ function getWeekStart() {
 
 export default function RankingScreen() {
   const { user } = useAuth();
+  const { isPremium } = usePurchases();
   const [rank, setRank] = useState<RankEntry[]>([]);
   const [groupName, setGroupName] = useState("");
   const [loading, setLoading] = useState(true);
@@ -232,47 +234,57 @@ export default function RankingScreen() {
           </View>
         )}
 
-        {/* Global ranking (locked) */}
+        {/* Global ranking */}
         <Text style={{ fontFamily: FONT_BODY_BOLD, fontSize: 11, color: COLOR.slate, marginBottom: 8 }}>
           전체 랭킹
         </Text>
         <View style={{ borderRadius: 12, overflow: "hidden", backgroundColor: COLOR.white }}>
-          <View style={{ padding: 16, gap: 12, opacity: 0.15 }}>
-            {["서울 러너1 · 7회", "서울 러너2 · 6회", "서울 러너3 · 5회"].map((t, i) => (
-              <Text key={i} style={{ fontFamily: FONT_BODY, fontSize: 14, color: COLOR.asphalt }}>
-                {t}
+          {isPremium ? (
+            <View style={{ padding: 16 }}>
+              <Text style={{ fontFamily: FONT_BODY, fontSize: 13, color: COLOR.slate, textAlign: "center" }}>
+                전체 랭킹 데이터를 준비 중이에요
               </Text>
-            ))}
-          </View>
-          <View
-            style={{
-              position: "absolute",
-              inset: 0,
-              backgroundColor: "rgba(237,235,230,0.85)",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 8,
-            }}
-          >
-            <Lock size={18} color={COLOR.asphalt} />
-            <Text style={{ fontFamily: FONT_BODY_BOLD, fontSize: 12, color: COLOR.asphalt }}>
-              월 1,500원으로 잠금 해제
-            </Text>
-            <TouchableOpacity
-              onPress={() => setSubscribeOpen(true)}
-              style={{
-                backgroundColor: COLOR.lime,
-                paddingHorizontal: 16,
-                paddingVertical: 8,
-                borderRadius: 20,
-                marginTop: 4,
-              }}
-            >
-              <Text style={{ fontFamily: FONT_BODY_EXTRABOLD, fontSize: 12, color: COLOR.asphalt }}>
-                구독하기
-              </Text>
-            </TouchableOpacity>
-          </View>
+            </View>
+          ) : (
+            <>
+              <View style={{ padding: 16, gap: 12, opacity: 0.15 }}>
+                {["서울 러너1 · 7회", "서울 러너2 · 6회", "서울 러너3 · 5회"].map((t, i) => (
+                  <Text key={i} style={{ fontFamily: FONT_BODY, fontSize: 14, color: COLOR.asphalt }}>
+                    {t}
+                  </Text>
+                ))}
+              </View>
+              <View
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  backgroundColor: "rgba(237,235,230,0.85)",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 8,
+                }}
+              >
+                <Lock size={18} color={COLOR.asphalt} />
+                <Text style={{ fontFamily: FONT_BODY_BOLD, fontSize: 12, color: COLOR.asphalt }}>
+                  월 1,500원으로 잠금 해제
+                </Text>
+                <TouchableOpacity
+                  onPress={() => setSubscribeOpen(true)}
+                  style={{
+                    backgroundColor: COLOR.lime,
+                    paddingHorizontal: 16,
+                    paddingVertical: 8,
+                    borderRadius: 20,
+                    marginTop: 4,
+                  }}
+                >
+                  <Text style={{ fontFamily: FONT_BODY_EXTRABOLD, fontSize: 12, color: COLOR.asphalt }}>
+                    구독하기
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </>
+          )}
         </View>
       </ScrollView>
 
