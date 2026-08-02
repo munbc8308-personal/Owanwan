@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.anonymous.owanwan'
+    namespace 'com.munbc8308.owanwan'
     defaultConfig {
-        applicationId 'com.anonymous.owanwan'
+        applicationId 'com.munbc8308.owanwan'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

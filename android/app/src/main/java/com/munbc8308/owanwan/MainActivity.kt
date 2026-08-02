@@ -1,4 +1,4 @@
-package com.anonymous.owanwan
+package com.munbc8308.owanwan
 
 import android.os.Build
 import android.os.Bundle

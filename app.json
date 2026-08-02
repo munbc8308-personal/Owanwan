@@ -9,7 +9,7 @@
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.owanwan"
+      "bundleIdentifier": "com.munbc8308.owanwan"
     },
     "android": {
       "adaptiveIcon": {
@@ -19,7 +19,7 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.owanwan"
+      "package": "com.munbc8308.owanwan"
     },
     "web": {
       "favicon": "./assets/favicon.png"

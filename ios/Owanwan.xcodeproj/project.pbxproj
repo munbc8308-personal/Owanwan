@@ -8,28 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		14FCE546099DE2436C4C0156 /* libPods-Owanwan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE50C02886010F9DBA8EA85B /* libPods-Owanwan.a */; };
+		3DBDF38EAED1B029D4DBF3E6 /* libPods-Owanwan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31866CCC15DB86C1590AE1F0 /* libPods-Owanwan.a */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		8158EE48618A68D0FB193284 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 48654193C9CE2FC025B88079 /* PrivacyInfo.xcprivacy */; };
-		B24D2E804FCD0C978C554AF6 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E4A0A3195F202EF9BA6EF6 /* ExpoModulesProvider.swift */; };
+		57016F792FC261293876D0C9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 030F5498EB4A22F01A62B728 /* PrivacyInfo.xcprivacy */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
+		F3B6D10C88753792C05847ED /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39666265BE0B73EBF3D145F5 /* ExpoModulesProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		030F5498EB4A22F01A62B728 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Owanwan/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Owanwan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Owanwan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Owanwan/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Owanwan/Info.plist; sourceTree = "<group>"; };
-		48654193C9CE2FC025B88079 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Owanwan/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		89E4A0A3195F202EF9BA6EF6 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Owanwan/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		31866CCC15DB86C1590AE1F0 /* libPods-Owanwan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Owanwan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		39666265BE0B73EBF3D145F5 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Owanwan/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		56A97B30E3D157D34CDB9935 /* Pods-Owanwan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Owanwan.debug.xcconfig"; path = "Target Support Files/Pods-Owanwan/Pods-Owanwan.debug.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = Owanwan/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		C78D504E7D78788E3B60B3DC /* Pods-Owanwan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Owanwan.debug.xcconfig"; path = "Target Support Files/Pods-Owanwan/Pods-Owanwan.debug.xcconfig"; sourceTree = "<group>"; };
-		CE50C02886010F9DBA8EA85B /* libPods-Owanwan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Owanwan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD81A6DBC55F143319F279D2 /* Pods-Owanwan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Owanwan.release.xcconfig"; path = "Target Support Files/Pods-Owanwan/Pods-Owanwan.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Owanwan/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* Owanwan-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Owanwan-Bridging-Header.h"; path = "Owanwan/Owanwan-Bridging-Header.h"; sourceTree = "<group>"; };
-		F2773D61108AC111BC3CACAA /* Pods-Owanwan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Owanwan.release.xcconfig"; path = "Target Support Files/Pods-Owanwan/Pods-Owanwan.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,21 +37,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14FCE546099DE2436C4C0156 /* libPods-Owanwan.a in Frameworks */,
+				3DBDF38EAED1B029D4DBF3E6 /* libPods-Owanwan.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		022D5B6279E59EDCCFAA1012 /* ExpoModulesProviders */ = {
-			isa = PBXGroup;
-			children = (
-				ACA44AA7B9760F53035B9C45 /* Owanwan */,
-			);
-			name = ExpoModulesProviders;
-			sourceTree = "<group>";
-		};
 		13B07FAE1A68108700A75B9A /* Owanwan */ = {
 			isa = PBXGroup;
 			children = (
@@ -61,28 +53,36 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				48654193C9CE2FC025B88079 /* PrivacyInfo.xcprivacy */,
+				030F5498EB4A22F01A62B728 /* PrivacyInfo.xcprivacy */,
 			);
 			name = Owanwan;
+			sourceTree = "<group>";
+		};
+		29C0D907C381CE6D100962AD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				56A97B30E3D157D34CDB9935 /* Pods-Owanwan.debug.xcconfig */,
+				DD81A6DBC55F143319F279D2 /* Pods-Owanwan.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				CE50C02886010F9DBA8EA85B /* libPods-Owanwan.a */,
+				31866CCC15DB86C1590AE1F0 /* libPods-Owanwan.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8250B593A1D00999675B1A7E /* Pods */ = {
+		6B7F4610E124A1131733E913 /* ExpoModulesProviders */ = {
 			isa = PBXGroup;
 			children = (
-				C78D504E7D78788E3B60B3DC /* Pods-Owanwan.debug.xcconfig */,
-				F2773D61108AC111BC3CACAA /* Pods-Owanwan.release.xcconfig */,
+				A894C45A8673D210FC157BBE /* Owanwan */,
 			);
-			name = Pods;
-			path = Pods;
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -99,8 +99,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				8250B593A1D00999675B1A7E /* Pods */,
-				022D5B6279E59EDCCFAA1012 /* ExpoModulesProviders */,
+				29C0D907C381CE6D100962AD /* Pods */,
+				6B7F4610E124A1131733E913 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -115,10 +115,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		ACA44AA7B9760F53035B9C45 /* Owanwan */ = {
+		A894C45A8673D210FC157BBE /* Owanwan */ = {
 			isa = PBXGroup;
 			children = (
-				89E4A0A3195F202EF9BA6EF6 /* ExpoModulesProvider.swift */,
+				39666265BE0B73EBF3D145F5 /* ExpoModulesProvider.swift */,
 			);
 			name = Owanwan;
 			sourceTree = "<group>";
@@ -140,13 +140,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Owanwan" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				308F3752137CD7491F989699 /* [Expo] Configure project */,
+				29A22F1EB262DF0C29ADB078 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				3EEC0EE6ED79C557DA849BB4 /* [CP] Embed Pods Frameworks */,
+				5F6EB71FD17631796F627A0A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,7 +196,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				8158EE48618A68D0FB193284 /* PrivacyInfo.xcprivacy in Resources */,
+				57016F792FC261293876D0C9 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +242,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		308F3752137CD7491F989699 /* [Expo] Configure project */ = {
+		29A22F1EB262DF0C29ADB078 /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -266,7 +266,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-Owanwan/expo-configure-project.sh\"\n";
 		};
-		3EEC0EE6ED79C557DA849BB4 /* [CP] Embed Pods Frameworks */ = {
+		5F6EB71FD17631796F627A0A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -348,7 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				B24D2E804FCD0C978C554AF6 /* ExpoModulesProvider.swift in Sources */,
+				F3B6D10C88753792C05847ED /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +357,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C78D504E7D78788E3B60B3DC /* Pods-Owanwan.debug.xcconfig */;
+			baseConfigurationReference = 56A97B30E3D157D34CDB9935 /* Pods-Owanwan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -382,7 +382,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.anonymous.owanwan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.munbc8308.owanwan;
 				PRODUCT_NAME = Owanwan;
 				SWIFT_OBJC_BRIDGING_HEADER = "Owanwan/Owanwan-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -394,7 +394,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2773D61108AC111BC3CACAA /* Pods-Owanwan.release.xcconfig */;
+			baseConfigurationReference = DD81A6DBC55F143319F279D2 /* Pods-Owanwan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -414,7 +414,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.anonymous.owanwan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.munbc8308.owanwan;
 				PRODUCT_NAME = Owanwan;
 				SWIFT_OBJC_BRIDGING_HEADER = "Owanwan/Owanwan-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

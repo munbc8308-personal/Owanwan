@@ -1,4 +1,4 @@
-package com.anonymous.owanwan
+package com.munbc8308.owanwan
 
 import android.app.Application
 import android.content.res.Configuration

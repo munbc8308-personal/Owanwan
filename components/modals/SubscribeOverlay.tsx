@@ -38,20 +38,20 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
     <Modal visible={visible} animationType="slide" presentationStyle="fullScreen">
       <View style={{ flex: 1, backgroundColor: COLOR.concrete }}>
         {done ? (
-          <View style={{ backgroundColor: COLOR.asphalt }}>
-            <View style={{ width: 64, height: 64, borderRadius: 32, backgroundColor: COLOR.lime, alignItems: "center", justifyContent: "center", marginBottom: 20 }}>
-              <Check size={28} color={COLOR.asphalt} />
+          <View style={{ flex: 1, backgroundColor: COLOR.asphalt, justifyContent: "center", alignItems: "center", paddingHorizontal: 32, paddingTop: insets.top, paddingBottom: insets.bottom + 24 }}>
+            <View style={{ width: 72, height: 72, borderRadius: 36, backgroundColor: COLOR.lime, alignItems: "center", justifyContent: "center", marginBottom: 24 }}>
+              <Check size={32} color={COLOR.asphalt} />
             </View>
-            <Text style={{ fontFamily: FONT_DISPLAY, fontSize: 30, color: COLOR.white, textAlign: "center" }}>
+            <Text style={{ fontFamily: FONT_DISPLAY, fontSize: 34, color: COLOR.white, textAlign: "center" }}>
               구독이 완료됐어요
             </Text>
-            <Text style={{ fontFamily: FONT_BODY, fontSize: 13, color: COLOR.slate, marginTop: 8, textAlign: "center", lineHeight: 20 }}>
+            <Text style={{ fontFamily: FONT_BODY, fontSize: 13, color: COLOR.slate, marginTop: 12, textAlign: "center", lineHeight: 20 }}>
               {plan === "yearly" ? "연 15,000원" : "월 1,500원"} 결제가 확인됐어요.{"\n"}이제 모든 기능을 사용할 수 있어요.
             </Text>
             <TouchableOpacity
               onPress={handleClose}
               style={{
-                marginTop: 32,
+                marginTop: 40,
                 width: "100%",
                 paddingVertical: 16,
                 borderRadius: 16,
@@ -73,7 +73,7 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
                 alignItems: "center",
                 justifyContent: "space-between",
                 paddingHorizontal: 20,
-                paddingTop: insets.top + 4,
+                paddingTop: insets.top + 12,
                 paddingBottom: 12,
               }}
             >
@@ -86,11 +86,11 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
               <View style={{ width: 20 }} />
             </View>
 
-            <ScrollView contentContainerStyle={{ paddingBottom: 16, paddingHorizontal: 20 }}>
+            <ScrollView contentContainerStyle={{ paddingBottom: 16, paddingHorizontal: 20, paddingTop: 8 }}>
               <Text style={{ fontFamily: FONT_MONO_BOLD, fontSize: 11, color: COLOR.red, letterSpacing: 1.5 }}>
                 OWANWAN UNLOCK
               </Text>
-              <Text style={{ fontFamily: FONT_DISPLAY, fontSize: 36, color: COLOR.asphalt, lineHeight: 34, marginTop: 4 }}>
+              <Text style={{ fontFamily: FONT_DISPLAY, fontSize: 36, color: COLOR.asphalt, lineHeight: 42, marginTop: 4 }}>
                 {"더 진하게\n기록해보세요"}
               </Text>
 
