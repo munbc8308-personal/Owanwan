@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { View, Text, Modal, TouchableOpacity, ScrollView, Alert, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  Modal,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { X, Check, RotateCcw } from "lucide-react-native";
 import { PACKAGE_TYPE, type PurchasesPackage } from "react-native-purchases";
@@ -53,12 +61,17 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
     onClose();
   };
 
-  const findPackage = (type: "monthly" | "yearly"): PurchasesPackage | undefined => {
-    return packages.find((p) =>
+  const findPackage = (type: "monthly" | "yearly"): PurchasesPackage | undefined =>
+    packages.find((p) =>
       type === "monthly"
         ? p.packageType === PACKAGE_TYPE.MONTHLY
         : p.packageType === PACKAGE_TYPE.ANNUAL
     );
+
+  const priceLabel = (type: "monthly" | "yearly") => {
+    const pkg = findPackage(type);
+    if (pkg?.product.priceString) return pkg.product.priceString;
+    return type === "monthly" ? "₩1,500" : "₩15,000";
   };
 
   const handlePurchase = async () => {
@@ -88,21 +101,32 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
     }
   };
 
-  const monthlyPkg = findPackage("monthly");
-  const yearlyPkg = findPackage("yearly");
-
-  const priceLabel = (type: "monthly" | "yearly") => {
-    const pkg = type === "monthly" ? monthlyPkg : yearlyPkg;
-    if (!pkg) return type === "monthly" ? "1,500원" : "15,000원";
-    return pkg.product.priceString;
-  };
-
   return (
     <Modal visible={visible} animationType="slide" presentationStyle="fullScreen">
       <View style={{ flex: 1, backgroundColor: COLOR.concrete }}>
         {done ? (
-          <View style={{ flex: 1, backgroundColor: COLOR.asphalt, justifyContent: "center", alignItems: "center", paddingHorizontal: 32, paddingTop: insets.top, paddingBottom: insets.bottom + 24 }}>
-            <View style={{ width: 72, height: 72, borderRadius: 36, backgroundColor: COLOR.lime, alignItems: "center", justifyContent: "center", marginBottom: 24 }}>
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: COLOR.asphalt,
+              justifyContent: "center",
+              alignItems: "center",
+              paddingHorizontal: 32,
+              paddingTop: insets.top,
+              paddingBottom: insets.bottom + 24,
+            }}
+          >
+            <View
+              style={{
+                width: 72,
+                height: 72,
+                borderRadius: 36,
+                backgroundColor: COLOR.lime,
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: 24,
+              }}
+            >
               <Check size={32} color={COLOR.asphalt} />
             </View>
             <Text style={{ fontFamily: FONT_DISPLAY, fontSize: 34, color: COLOR.white, textAlign: "center" }}>
@@ -122,7 +146,6 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
           </View>
         ) : (
           <>
-            {/* Header */}
             <View
               style={{
                 flexDirection: "row",
@@ -155,7 +178,6 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
                 {"더 진하게\n기록해보세요"}
               </Text>
 
-              {/* Plan toggle */}
               {loading ? (
                 <View style={{ paddingVertical: 40, alignItems: "center" }}>
                   <ActivityIndicator color={COLOR.asphalt} />
@@ -182,21 +204,20 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
                           </Text>
                         </View>
                       )}
-                      <Text style={{ fontFamily: FONT_BODY_BOLD, fontSize: 12, color: plan === p ? COLOR.slate : COLOR.slate }}>
+                      <Text style={{ fontFamily: FONT_BODY_BOLD, fontSize: 12, color: COLOR.slate }}>
                         {p === "monthly" ? "월간" : "연간"}
                       </Text>
                       <Text style={{ fontFamily: FONT_DISPLAY, fontSize: 24, color: plan === p ? COLOR.lime : COLOR.asphalt, marginTop: 2 }}>
                         {priceLabel(p)}
                       </Text>
                       <Text style={{ fontFamily: FONT_BODY, fontSize: 11, color: COLOR.slate }}>
-                        {p === "monthly" ? "매월" : "월 환산 1,250원"}
+                        {p === "monthly" ? "매월" : "월 환산 ₩1,250"}
                       </Text>
                     </TouchableOpacity>
                   ))}
                 </View>
               )}
 
-              {/* Features list */}
               <Text style={{ fontFamily: FONT_BODY_BOLD, fontSize: 11, color: COLOR.slate, marginTop: 24 }}>
                 구독하면 이런 게 열려요
               </Text>
@@ -227,7 +248,6 @@ export default function SubscribeOverlay({ visible, onClose }: SubscribeOverlayP
               </Text>
             </ScrollView>
 
-            {/* CTA */}
             <View style={{ paddingHorizontal: 20, paddingBottom: insets.bottom + 16 }}>
               <TouchableOpacity
                 onPress={handlePurchase}

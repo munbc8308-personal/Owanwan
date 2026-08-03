@@ -33,6 +33,9 @@ export function PurchasesProvider({ children }: { children: React.ReactNode }) {
       return;
     }
     Purchases.setLogLevel(LOG_LEVEL.ERROR);
+    Purchases.setLogHandler((_level, message) => {
+      console.log(`[RC] ${message}`);
+    });
     if (Platform.OS === "ios") {
       Purchases.configure({ apiKey: IOS_KEY });
     }
@@ -72,8 +75,9 @@ export function PurchasesProvider({ children }: { children: React.ReactNode }) {
   const purchasePackage = useCallback(async (pkg: PurchasesPackage) => {
     try {
       const { customerInfo } = await Purchases.purchasePackage(pkg);
-      setIsPremium(isPremiumFromInfo(customerInfo));
-      return { success: isPremiumFromInfo(customerInfo) };
+      const premium = isPremiumFromInfo(customerInfo);
+      setIsPremium(premium);
+      return { success: premium };
     } catch (e: any) {
       if (e.userCancelled) return { success: false };
       return { success: false, error: e.message ?? "결제 중 오류가 발생했어요" };
